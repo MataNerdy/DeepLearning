@@ -13,3 +13,4 @@ __pycache__/
 notebooks/
 Game_of_thrones/notebooks/
 logs.txt
+*.html
