@@ -1,202 +1,144 @@
 # Game of Thrones Survival Prediction — sklearn Classification
 
-### Situation
-
-Решение задачи бинарной классификации на датасете персонажей вселенной «Игры престолов».
-
-Датасет содержал большое количество пропусков, категориальных признаков и неоднородных текстовых данных:
-
-* дома (`House`)
-* титулы (`Title`)
-* культуры (`Culture`)
-* связи между персонажами
-* демографические признаки
-
-Цель — предсказать, выживет ли персонаж (`isAlive`).
+![Correlation Matrix](images/correlation_matrix.png)
 
 ---
 
-### Task
+## О проекте
 
-Нужно было:
+Проект посвящён задаче бинарной классификации на табличных данных из вселенной *Game of Thrones*.
 
-* провести полный EDA и предобработку данных;
-* обработать большое количество NaN;
-* спроектировать новые признаки;
-* подготовить категориальные данные для ML-моделей;
-* обучить и сравнить несколько алгоритмов классификации из `sklearn`;
-* выбрать лучшую модель по accuracy;
-* сформировать финальный `submission.csv`.
+Цель — предсказать, выживет ли персонаж (`isAlive`) на основе:
 
----
-
-### Action
-
-В рамках проекта был реализован полный tabular ML pipeline:
-
-#### 1. Exploratory Data Analysis (EDA)
-
-* анализ распределений признаков;
-* визуализация пропусков;
-* анализ баланса классов;
-* исследование корреляций;
-* анализ влияния домов, титулов, культур и популярности на выживаемость.
-
-#### 2. Data Cleaning & Feature Engineering
-
-* обработка NaN;
-* объединение редких категорий;
-* нормализация названий культур;
-* создание бинарных признаков:
-  * `isPopular`
-  * `boolDeadRelations`
-* извлечение дополнительной информации из имен персонажей;
-* инженерия признака `years` на основе возраста и даты рождения.
-
-#### 3. Encoding
-
-Для категориальных признаков использовался `OneHotEncoder`, поскольку между категориями отсутствует отношение порядка.
-
-#### 4. Model Training
-
-Были обучены и сравнены:
-
-* Logistic Regression
-* Random Forest
-* AdaBoost
-* Gaussian Process
-* Gaussian Naive Bayes
-* KNN
-* SVC
-* Decision Tree
-
-#### 5. Evaluation
-
-Модели сравнивались по метрике `accuracy`.
-
-Лучший результат на holdout-выборке показала модель `KNeighborsClassifier` с accuracy = 0.8558.
+- происхождения;
+- дома;
+- культуры;
+- семейных связей;
+- популярности;
+- участия в книгах;
+- социальных признаков.
 
 ---
 
-### Result
+## Key Highlights
 
-Проект успешно прошел валидацию на Stepik.
-
-Ключевые результаты:
-
-* реализован полный ML pipeline для табличной классификации;
-* проведен feature engineering для сложных категориальных данных;
-* протестировано несколько ML-алгоритмов;
-* получен production-like опыт сравнения моделей;
-* оформлен финальный submission для leaderboard.
+- Binary classification on tabular data
+- Extensive feature engineering
+- High-cardinality categorical handling
+- GridSearchCV hyperparameter tuning
+- Comparison of 8 sklearn models
+- Best holdout accuracy: **0.8558**
+- Refactoring notebook into modular ML pipeline
 
 ---
 
-# 🧠 Технологии
+# Что здесь происходит
 
-* Python
-* pandas
-* NumPy
-* matplotlib
-* seaborn
-* scikit-learn
+На примере этого проекта можно увидеть реализацию:
 
----
-
-# 📂 Структура репозитория
-
-```text
-project/
-│
-├── data/
-│   ├── train.csv
-│   ├── test.csv
-│   └── submission.csv
-│
-├── notebooks/
-│   └── Stepik_hw1.ipynb
-│
-├── images/
-│   ├── nan_analysis.png
-│   ├── survival_by_house.png
-│   ├── correlation_matrix.png
-│   └── leaderboard_score.png
-│
-├── README.md
-├── requirements.txt
-└── .gitignore
-```
+- работы с tabular ML;
+- feature engineering;
+- обработки категориальных признаков;
+- работы с пропусками;
+- сравнения ML-моделей;
+- hyperparameter tuning;
+- построения reproducible ML pipeline.
 
 ---
 
-# 🔍 Что интересно в проекте
+# STAR Summary
 
-## Dataset Overview
+## Situation
 
-Исходный датасет содержал 1557 объектов и 25 признаков.
+Исходный датасет содержал:
 
-### Типы данных
+- большое количество пропусков;
+- категориальные признаки высокой кардинальности;
+- разреженные genealogical-признаки;
+- неоднородные текстовые данные.
 
-* числовые признаки (`age`, `popularity`, `numDeadRelations`)
-* бинарные признаки (`male`, `isNoble`, `isMarried`)
-* категориальные признаки (`house`, `culture`, `title`)
-* сильно разреженные genealogical-признаки (`mother`, `father`, `heir`, `spouse`)
+Особенно проблемными были:
 
-### Проблема пропусков
+- `culture`
+- `title`
+- `house`
+- `mother/father/heir/spouse`
 
-Одной из главных сложностей проекта стало большое количество missing values.
+Многие признаки имели более 50–80% пропусков.
 
-#### Train dataset
+---
 
-* `title` — 53.95% NaN
-* `house` — 24.47% NaN
-* `culture` — 68.66% NaN
-* `age` — 82.08% NaN
+## Task
 
-#### Test dataset
+Необходимо было:
 
-* `title` — 43.19% NaN
-* `house` — 11.83% NaN
-* `culture` — 51.41% NaN
-* `age` — 60.41% NaN
+- провести EDA;
+- обработать NaN;
+- выполнить feature engineering;
+- подготовить данные для sklearn-моделей;
+- обучить и сравнить несколько алгоритмов классификации;
+- выбрать лучшую модель;
+- сформировать итоговый `submission.csv`.
 
-Это потребовало аккуратной обработки категориальных признаков и feature engineering.
+---
 
-## Feature Engineering
+## Action
 
-Главная часть проекта — не обучение моделей, а именно работа с признаками.
+В проекте был реализован полный ML pipeline:
 
-Особенно интересными оказались:
+### Exploratory Data Analysis (EDA)
 
-* агрессивная очистка категориальных признаков;
-* объединение редких культур и домов;
-* попытка восстановить отсутствующие данные через лор и имена персонажей;
-* создание бинарных признаков поверх noisy data.
+- анализ распределений;
+- исследование пропусков;
+- анализ корреляций;
+- визуализация survival distribution.
 
-## Работа с категориальными данными
+### Data Cleaning & Feature Engineering
 
-Проект хорошо демонстрирует:
+- обработка NaN;
+- объединение редких категорий;
+- очистка noisy категориальных данных;
+- создание новых признаков;
+- генерация:
+  - `isPopular`
+  - `boolDeadRelations`
+  - `years`
 
-* проблемы high-cardinality категорий;
-* влияние One-Hot Encoding;
-* последствия редких категорий для ML-моделей.
+### Encoding
 
-## Результаты моделей
+Для категориальных признаков использовался `OneHotEncoder`.
 
-| Model               | Best CV Accuracy | Holdout Accuracy |
-| ------------------- | ---------------- | ---------------- |
-| Logistic Regression | 0.8506           | 0.8397           |
-| Random Forest       | 0.8506           | 0.8494           |
-| AdaBoost            | 0.8554           | 0.8429           |
-| Gaussian Process    | 0.8490           | 0.8429           |
-| GaussianNB          | 0.8209           | 0.8333           |
-| KNN                 | 0.8369           | **0.8558**       |
-| SVC                 | 0.8522           | 0.8462           |
-| Decision Tree       | 0.8530           | 0.8397           |
+### Model Training
 
-### Лучшие гиперпараметры
+Были протестированы:
 
-#### KNN
+- Logistic Regression
+- Random Forest
+- AdaBoost
+- Gaussian Process
+- Gaussian Naive Bayes
+- KNN
+- SVC
+- Decision Tree
+
+### Hyperparameter Tuning
+
+Для моделей использовался `GridSearchCV` с cross-validation.
+
+---
+
+## Result
+
+Лучший результат показала модель:
+
+# KNeighborsClassifier
+
+| Metric | Value |
+|---|---|
+| Best CV Accuracy | 0.8369 |
+| Holdout Accuracy | **0.8558** |
+
+Лучшие параметры:
 
 ```python
 {
@@ -206,7 +148,141 @@ project/
 }
 ```
 
-#### Random Forest
+Несмотря на более низкий CV score, KNN показал лучший результат на holdout-выборке.
+
+Вероятно, после feature engineering локальная структура признакового пространства оказалась хорошо разделимой для distance-based методов.
+
+---
+
+# Dataset Overview
+
+## Размер датасета
+
+- 1557 объектов
+- 25 признаков
+
+---
+
+# Main Challenges
+
+Основные сложности проекта:
+
+- 80% missing values в `age`
+- high-cardinality категориальные признаки
+- sparse genealogical features
+- noisy text categories
+- большое количество NaN
+- необходимость feature engineering поверх неполных данных
+
+---
+
+# Missing Values Analysis
+
+## Train dataset
+
+| Feature | Missing |
+|---|---|
+| title | 53.95% |
+| house | 24.47% |
+| culture | 68.66% |
+| age | 82.08% |
+
+## Test dataset
+
+| Feature | Missing |
+|---|---|
+| title | 43.19% |
+| house | 11.83% |
+| culture | 51.41% |
+| age | 60.41% |
+
+---
+
+# Визуализации
+
+## Target Distribution
+
+![Target Distribution](images/target_distribution.png)
+
+---
+
+## Missing Values Analysis
+
+![Missing Values](images/nan_analysis.png)
+
+---
+
+## Heatmap Before Feature Engineering
+
+![Before FE](images/heatmap_before.png)
+
+---
+
+## Heatmap After Feature Engineering
+
+![After FE](images/heatmap_after.png)
+
+---
+
+## Correlation Matrix
+
+![Correlation Matrix](images/correlation_matrix.png)
+
+---
+
+# Feature Engineering
+
+Основной акцент проекта был сделан именно на работе с признаками.
+
+Были реализованы:
+
+- очистка категориальных данных;
+- объединение редких культур;
+- обработка NaN;
+- создание бинарных признаков;
+- извлечение информации из текстовых признаков;
+- генерация признаков на основе семейных связей.
+
+---
+
+## Созданные признаки
+
+| Feature | Description |
+|---|---|
+| isPopular | Популярность персонажа |
+| boolDeadRelations | Есть ли мёртвые родственники |
+| years | Возраст / дата рождения |
+
+---
+
+# Model Comparison
+
+| Model | Best CV Accuracy | Holdout Accuracy |
+|---|---|---|
+| Logistic Regression | 0.8506 | 0.8397 |
+| Random Forest | 0.8506 | 0.8494 |
+| AdaBoost | 0.8554 | 0.8429 |
+| Gaussian Process | 0.8490 | 0.8429 |
+| GaussianNB | 0.8209 | 0.8333 |
+| KNN | 0.8369 | **0.8558** |
+| SVC | 0.8522 | 0.8462 |
+| Decision Tree | 0.8530 | 0.8397 |
+
+---
+
+# Best Hyperparameters
+
+## KNN
+
+```python
+{
+    'n_neighbors': 21,
+    'p': 1,
+    'weights': 'distance'
+}
+```
+
+## Random Forest
 
 ```python
 {
@@ -217,7 +293,7 @@ project/
 }
 ```
 
-#### AdaBoost
+## AdaBoost
 
 ```python
 {
@@ -227,65 +303,111 @@ project/
 }
 ```
 
-## Сравнение классических ML-моделей
+---
 
-Проект показывает различия между:
+# Что показывает проект
 
-* линейными моделями;
-* деревьями решений;
-* ансамблями;
-* kernel-based моделями.
+Проект демонстрирует:
+
+- полный workflow tabular ML-задачи;
+- работу с пропусками;
+- feature engineering;
+- обработку high-cardinality категорий;
+- сравнение sklearn-моделей;
+- hyperparameter tuning;
+- reproducible ML pipeline.
 
 ---
 
-# 📈 Возможные улучшения
+# Repository Evolution
 
-Что можно было бы сделать дальше:
+Проект начинался как exploratory notebook, но позже был переработан в modular ML pipeline с разделением:
 
-* добавить cross-validation;
-* использовать GridSearchCV;
-* попробовать CatBoost / XGBoost;
-* добавить feature importance analysis;
-* провести calibration analysis;
-* попробовать target encoding;
-* оформить pipeline через sklearn Pipeline.
+- preprocessing;
+- feature engineering;
+- model training;
+- evaluation;
+- hyperparameter tuning.
 
 ---
 
-# 🚀 Как запустить
+# Структура проекта
 
-## Установка
+```text
+project/
+│
+├── data/
+│   ├── train.csv
+│   ├── test.csv
+│   └── submission.csv
+│
+├── src/
+│   ├── data_loading.py
+│   ├── preprocessing.py
+│   ├── models.py
+│   ├── grid_search.py
+│   ├── evaluate.py
+│   └── train.py
+│
+├── reports/
+│   └── grid_search_results.csv
+│
+├── images/
+│   ├── target_distribution.png
+│   ├── nan_analysis.png
+│   ├── heatmap_before.png
+│   ├── heatmap_after.png
+│   └── correlation_matrix.png
+│
+├── README.md
+├── requirements.txt
+└── .gitignore
+```
+
+---
+
+# Как запустить
+
+## Установка зависимостей
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Запуск ноутбука
+---
+
+## Запуск обучения
 
 ```bash
-jupyter notebook
-```
-
-Открыть:
-
-```text
-notebooks/Stepik_hw1.ipynb
+python src/train.py
 ```
 
 ---
 
-# 💡 Чему я научилась в проекте
+# Технологии
 
-* работать с табличными ML-задачами;
-* проводить EDA;
-* проектировать признаки;
-* обрабатывать категориальные данные;
-* сравнивать ML-модели;
-* выстраивать базовый ML workflow;
-* оформлять результаты для leaderboard-задач.
+- Python
+- pandas
+- NumPy
+- matplotlib
+- seaborn
+- scikit-learn
 
 ---
 
-# 📬 Контакты
+# Возможные улучшения
 
-GitHub: [https://github.com/MataNerdy](https://github.com/MataNerdy)
+Что можно улучшить дальше:
+
+- добавить sklearn Pipeline;
+- использовать CatBoost / XGBoost;
+- добавить calibration analysis;
+- провести feature importance analysis;
+- попробовать target encoding;
+- реализовать stacking/blending моделей.
+
+---
+
+# Контакты
+
+GitHub: https://github.com/MataNerdy
