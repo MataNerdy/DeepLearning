@@ -54,8 +54,55 @@ KNeighborsClassifier
 SVC
 DecisionTreeClassifier
 
-AdaBoost Accuracy : 0.8397
-Random Forrest Accuracy : 0.8558
+Training logreg...
+Fitting 5 folds for each of 4 candidates, totalling 20 fits
+Best CV accuracy: 0.8506
+Holdout accuracy: 0.8397
+Best params: {'C': 3, 'solver': 'liblinear'}
+
+Training random_forest...
+Fitting 5 folds for each of 54 candidates, totalling 270 fits
+Best CV accuracy: 0.8506
+Holdout accuracy: 0.8494
+Best params: {'max_depth': 10, 'max_features': 'sqrt', 'min_samples_split': 2, 'n_estimators': 100}
+
+Training adaboost...
+Fitting 5 folds for each of 36 candidates, totalling 180 fits
+Best CV accuracy: 0.8554
+Holdout accuracy: 0.8429
+Best params: {'estimator__max_depth': 2, 'learning_rate': 1.0, 'n_estimators': 200}
+
+Training gaussian_process...
+Fitting 5 folds for each of 3 candidates, totalling 15 fits
+Best CV accuracy: 0.8490
+Holdout accuracy: 0.8429
+Best params: {'max_iter_predict': 50}
+
+Training gaussian_nb...
+Fitting 5 folds for each of 4 candidates, totalling 20 fits
+Best CV accuracy: 0.8209
+Holdout accuracy: 0.8333
+Best params: {'var_smoothing': 1e-09}
+
+Training knn...
+Fitting 5 folds for each of 28 candidates, totalling 140 fits
+Best CV accuracy: 0.8369
+Holdout accuracy: 0.8558
+Best params: {'n_neighbors': 21, 'p': 1, 'weights': 'distance'}
+
+Training svc...
+Fitting 5 folds for each of 16 candidates, totalling 80 fits
+Best CV accuracy: 0.8522
+Holdout accuracy: 0.8462
+Best params: {'C': 3, 'gamma': 'scale', 'kernel': 'rbf'}
+
+Training decision_tree...
+Fitting 5 folds for each of 120 candidates, totalling 600 fits
+Best CV accuracy: 0.8530
+Holdout accuracy: 0.8397
+
+AdaBoost Accuracy : 0.8429
+Random Forrest Accuracy : 0.8494
 GaussianProcess Accuracy : 0.8429
 GaussianNBAccuracy : 0.8333
 KnnAccuracy : 0.8558

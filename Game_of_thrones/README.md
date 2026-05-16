@@ -1,7 +1,5 @@
 # Game of Thrones Survival Prediction — sklearn Classification
 
-## STAR Summary
-
 ### Situation
 
 Решение задачи бинарной классификации на датасете персонажей вселенной «Игры престолов».
@@ -50,7 +48,6 @@
 * объединение редких категорий;
 * нормализация названий культур;
 * создание бинарных признаков:
-
   * `isPopular`
   * `boolDeadRelations`
 * извлечение дополнительной информации из имен персонажей;
@@ -77,7 +74,7 @@
 
 Модели сравнивались по метрике `accuracy`.
 
-Лучший результат показала модель `SVC`.
+Лучший результат на holdout-выборке показала модель `KNeighborsClassifier` с accuracy = 0.8558.
 
 ---
 
@@ -95,7 +92,7 @@
 
 ---
 
-# Технологии
+# 🧠 Технологии
 
 * Python
 * pandas
@@ -106,7 +103,7 @@
 
 ---
 
-# Структура репозитория
+# 📂 Структура репозитория
 
 ```text
 project/
@@ -132,7 +129,38 @@ project/
 
 ---
 
-# Что интересно в проекте
+# 🔍 Что интересно в проекте
+
+## Dataset Overview
+
+Исходный датасет содержал 1557 объектов и 25 признаков.
+
+### Типы данных
+
+* числовые признаки (`age`, `popularity`, `numDeadRelations`)
+* бинарные признаки (`male`, `isNoble`, `isMarried`)
+* категориальные признаки (`house`, `culture`, `title`)
+* сильно разреженные genealogical-признаки (`mother`, `father`, `heir`, `spouse`)
+
+### Проблема пропусков
+
+Одной из главных сложностей проекта стало большое количество missing values.
+
+#### Train dataset
+
+* `title` — 53.95% NaN
+* `house` — 24.47% NaN
+* `culture` — 68.66% NaN
+* `age` — 82.08% NaN
+
+#### Test dataset
+
+* `title` — 43.19% NaN
+* `house` — 11.83% NaN
+* `culture` — 51.41% NaN
+* `age` — 60.41% NaN
+
+Это потребовало аккуратной обработки категориальных признаков и feature engineering.
 
 ## Feature Engineering
 
@@ -153,6 +181,52 @@ project/
 * влияние One-Hot Encoding;
 * последствия редких категорий для ML-моделей.
 
+## Результаты моделей
+
+| Model               | Best CV Accuracy | Holdout Accuracy |
+| ------------------- | ---------------- | ---------------- |
+| Logistic Regression | 0.8506           | 0.8397           |
+| Random Forest       | 0.8506           | 0.8494           |
+| AdaBoost            | 0.8554           | 0.8429           |
+| Gaussian Process    | 0.8490           | 0.8429           |
+| GaussianNB          | 0.8209           | 0.8333           |
+| KNN                 | 0.8369           | **0.8558**       |
+| SVC                 | 0.8522           | 0.8462           |
+| Decision Tree       | 0.8530           | 0.8397           |
+
+### Лучшие гиперпараметры
+
+#### KNN
+
+```python
+{
+    'n_neighbors': 21,
+    'p': 1,
+    'weights': 'distance'
+}
+```
+
+#### Random Forest
+
+```python
+{
+    'max_depth': 10,
+    'max_features': 'sqrt',
+    'min_samples_split': 2,
+    'n_estimators': 100
+}
+```
+
+#### AdaBoost
+
+```python
+{
+    'estimator__max_depth': 2,
+    'learning_rate': 1.0,
+    'n_estimators': 200
+}
+```
+
 ## Сравнение классических ML-моделей
 
 Проект показывает различия между:
@@ -164,11 +238,12 @@ project/
 
 ---
 
-# Возможные улучшения
+# 📈 Возможные улучшения
 
 Что можно было бы сделать дальше:
 
 * добавить cross-validation;
+* использовать GridSearchCV;
 * попробовать CatBoost / XGBoost;
 * добавить feature importance analysis;
 * провести calibration analysis;
@@ -177,15 +252,40 @@ project/
 
 ---
 
-# Как запустить
+# 🚀 Как запустить
 
 ## Установка
 
 ```bash
 pip install -r requirements.txt
 ```
+
+## Запуск ноутбука
+
+```bash
+jupyter notebook
+```
+
+Открыть:
+
+```text
+notebooks/Stepik_hw1.ipynb
+```
+
 ---
 
-# Контакты
+# 💡 Чему я научилась в проекте
+
+* работать с табличными ML-задачами;
+* проводить EDA;
+* проектировать признаки;
+* обрабатывать категориальные данные;
+* сравнивать ML-модели;
+* выстраивать базовый ML workflow;
+* оформлять результаты для leaderboard-задач.
+
+---
+
+# 📬 Контакты
 
 GitHub: [https://github.com/MataNerdy](https://github.com/MataNerdy)
