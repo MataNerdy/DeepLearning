@@ -1,0 +1,12 @@
+*.tif
+*.las
+*.geojson
+__pycache__/
+*.pyc
+.DS_Store
+*.json
+*.npy
+*.pth
+*.zip
+*.ipynb_checkpoints
+*.ipynb

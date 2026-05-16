@@ -1,0 +1,63 @@
+<class 'pandas.core.frame.DataFrame'>
+Index: 1557 entries, 1 to 1557
+Data columns (total 25 columns):
+ #   Column            Non-Null Count  Dtype
+---  ------            --------------  -----
+ 0   name              1557 non-null   object
+ 1   title             717 non-null    object
+ 2   male              1557 non-null   int64
+ 3   culture           488 non-null    object
+ 4   dateOfBirth       279 non-null    float64
+ 5   mother            18 non-null     object
+ 6   father            22 non-null     object
+ 7   heir              21 non-null     object
+ 8   house             1176 non-null   object
+ 9   spouse            200 non-null    object
+ 10  book1             1557 non-null   int64
+ 11  book2             1557 non-null   int64
+ 12  book3             1557 non-null   int64
+ 13  book4             1557 non-null   int64
+ 14  book5             1557 non-null   int64
+ 15  isAliveMother     18 non-null     float64
+ 16  isAliveFather     22 non-null     float64
+ 17  isAliveHeir       21 non-null     float64
+ 18  isAliveSpouse     200 non-null    float64
+ 19  isMarried         1557 non-null   int64
+ 20  isNoble           1557 non-null   int64
+ 21  age               279 non-null    float64
+ 22  numDeadRelations  1557 non-null   int64
+ 23  popularity        1557 non-null   float64
+ 24  isAlive           1557 non-null   int64
+dtypes: float64(7), int64(10), object(8)
+memory usage: 316.3+ KB
+
+data.train
+53.95 % пропущенных данных у признака title
+24.47 % пропущенных данных у признака house
+68.658 % пропущенных данных у признака culture
+82.081 % пропущенных данных у признака age
+
+data.test
+43.188 % пропущенных данных у признака title
+11.825 % пропущенных данных у признака house
+51.414 % пропущенных данных у признака culture
+60.411 % пропущенных данных у признака age
+
+Импортируем следующие модели из библиотеки sklearn
+
+LogisticRegression
+RandomForestClassifier
+AdaBoostClassifier
+GaussianProcessClassifier
+GaussianNB
+KNeighborsClassifier
+SVC
+DecisionTreeClassifier
+
+AdaBoost Accuracy : 0.8397
+Random Forrest Accuracy : 0.8558
+GaussianProcess Accuracy : 0.8429
+GaussianNBAccuracy : 0.8333
+KnnAccuracy : 0.8558
+SvcAccuracy : 0.8462
+DtcAccuracy : 0.8397
