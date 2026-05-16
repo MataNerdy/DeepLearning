@@ -224,12 +224,6 @@
 
 ---
 
-## Correlation Matrix
-
-![Correlation Matrix](images/correlation_matrix.png)
-
----
-
 # Feature Engineering
 
 Основной акцент проекта был сделан именно на работе с признаками.

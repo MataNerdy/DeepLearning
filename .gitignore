@@ -11,5 +11,5 @@ __pycache__/
 *.ipynb_checkpoints
 *.ipynb
 notebooks/
-*.txt
-Game_of_thrones/notebooks
+Game_of_thrones/notebooks/
+logs.txt
