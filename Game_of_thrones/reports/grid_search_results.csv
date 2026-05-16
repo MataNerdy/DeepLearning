@@ -1,0 +1,9 @@
+model,best_cv_accuracy,holdout_accuracy,best_params
+knn,0.8369477911646588,0.8557692307692307,"{'n_neighbors': 21, 'p': 1, 'weights': 'distance'}"
+random_forest,0.8506024096385542,0.8493589743589743,"{'max_depth': 10, 'max_features': 'sqrt', 'min_samples_split': 2, 'n_estimators': 100}"
+svc,0.8522088353413654,0.8461538461538461,"{'C': 3, 'gamma': 'scale', 'kernel': 'rbf'}"
+adaboost,0.8554216867469879,0.842948717948718,"{'estimator__max_depth': 2, 'learning_rate': 1.0, 'n_estimators': 200}"
+gaussian_process,0.8489959839357428,0.842948717948718,{'max_iter_predict': 50}
+decision_tree,0.853012048192771,0.8397435897435898,"{'criterion': 'gini', 'max_depth': 5, 'min_samples_leaf': 1, 'min_samples_split': 2}"
+logreg,0.8506024096385542,0.8397435897435898,"{'C': 3, 'solver': 'liblinear'}"
+gaussian_nb,0.8208835341365461,0.8333333333333334,{'var_smoothing': 1e-09}
