@@ -8,7 +8,7 @@
 
 ![Dataset samples](assets/dataset.png)
 
-# Challenges
+### Challenges
 
 - strong class imbalance
 - visually similar characters
@@ -126,7 +126,7 @@
 
 ### 5. Final Training
 
-# Best Model
+**Best Model**
 
 EfficientNet-B0
 - Validation Accuracy: 0.9631
@@ -253,7 +253,7 @@ python src/inference.py \
 - Data Augmentation
 - Multiclass Classification
 
-# Possible Improvements
+## Possible Improvements
 
 - cosine scheduler
 - mixed precision training
