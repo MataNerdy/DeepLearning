@@ -86,7 +86,7 @@ ML-проект по решению задачи бинарной классиф
 ## Категориальные признаки
 
 <p align="center">
-  <img src="assets/categorical_features.png" width="1000">
+  <img src="assets/cat_features_overview.png" width="1000">
 </p>
 
 Особое внимание уделялось:
