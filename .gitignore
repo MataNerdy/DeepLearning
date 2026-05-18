@@ -1,16 +1,26 @@
+# notebooks
+*.ipynb
+.ipynb_checkpoints/
+notebooks/
+
+# html
+*.html
+
+# python
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# ml / geodata
 *.tif
 *.las
 *.geojson
-__pycache__/
-*.pyc
-.DS_Store
-*.json
 *.npy
 *.pth
 *.zip
-*.ipynb_checkpoints
-*.ipynb
-notebooks/
-Game_of_thrones/notebooks/
+*.json
+
+# logs
 logs.txt
-*.html
