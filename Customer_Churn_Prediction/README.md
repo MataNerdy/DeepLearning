@@ -357,17 +357,20 @@ Logistic Regression показала:
 - подготовлены финальные предсказания.
 
 ## Стек технологий
-    ML / DS
-        Python
-        pandas
-        numpy
-        scikit-learn
-        catboost
-        matplotlib
-        seaborn
 
-    Метрики
-        ROC-AUC
+### ML / DS
+
+- Python
+- pandas
+- numpy
+- scikit-learn
+- catboost
+- matplotlib
+- seaborn
+
+### Метрики
+
+- ROC-AUC
 
 ## Структура проекта
 
@@ -394,41 +397,41 @@ project/
 │   └── cat_features_overview.png
 │
 ├── requirements.txt
-├── README.md
+└── README.md
 
 
 ## Что можно улучшить дальше
 
-ML improvements
+### ML improvements
 
-    feature engineering,
-    target encoding,
-    Optuna tuning,
-    LightGBM / XGBoost,
-    ensemble methods,
-    probability calibration,
-    SHAP analysis.
+- feature engineering,
+- target encoding,
+- Optuna tuning,
+- LightGBM / XGBoost,
+- ensemble methods,
+- probability calibration,
+- SHAP analysis.
 
-Engineering improvements
+### Engineering improvements
 
-    sklearn Pipeline,
-    конфигурационные файлы,
-    logging,
-    сохранение моделей через joblib,
-    package structure,
-    автоматизация inference pipeline.
+- sklearn Pipeline,
+- конфигурационные файлы,
+- logging,
+- сохранение моделей через joblib,
+- package structure,
+- автоматизация inference pipeline.
 
 ## Что показывает этот проект
 
-Проект демонстрирует:
+### Проект демонстрирует:
 
-    end-to-end ML workflow,
-    EDA и feature analysis,
-    preprocessing pipeline,
-    работу с табличными данными,
-    cross-validation,
-    hyperparameter tuning,
-    сравнение baseline vs boosting,
-    анализ переобучения,
-    понимание бизнес-метрик churn,
-    reproducible ML-подход.
+- end-to-end ML workflow,
+- EDA и feature analysis,
+- preprocessing pipeline,
+- работу с табличными данными,
+- cross-validation,
+- hyperparameter tuning,
+- сравнение baseline vs boosting,
+- анализ переобучения,
+- понимание бизнес-метрик churn,
+- reproducible ML-подход.
