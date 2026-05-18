@@ -8,11 +8,19 @@
 
 ![Dataset samples](assets/dataset.png)
 
+# Challenges
+
+- strong class imbalance
+- visually similar characters
+- different image resolutions
+- pose and illumination variations
+- overfitting during longer training
+
 ---
 
 # Result
 
-Kaggle score: **0.98618**
+ Public Leaderboard Score: 0.98618
 
 Лучший результат был получен с помощью fine-tuned EfficientNet-B0.
 
@@ -118,6 +126,13 @@ Kaggle score: **0.98618**
 
 ### 5. Final Training
 
+# Best Model
+
+EfficientNet-B0
+- Validation Accuracy: 0.9631
+- Kaggle Score: 0.98618
+- Training Time: ~9 minutes on Tesla T4
+
 Для лучшей модели:
 
 - увеличен batch size
@@ -146,13 +161,22 @@ Kaggle score: **0.98618**
 
 Финальный результат:
 
-| Model | Validation Accuracy |
-|---|---|
-| SimpleCNN | 0.8286 |
-| ResNet18 | 0.9228 |
-| EfficientNet-B0 | 0.9561 |
+| Model | Train Time | Val Accuracy |
+|---|---|---|
+| SimpleCNN | 7m 17s | 0.8286 |
+| ResNet18 | 6m 26s | 0.9228 |
+| EfficientNet-B0 | 6m 47s | 0.9561 |
+| EfficientNet-B0 (extended training) | 9m 07s | 0.9631 |
 
 Final Kaggle score: **0.98618**
+
+# Key Findings
+
+- Transfer learning dramatically improved convergence speed and validation accuracy.
+- EfficientNet-B0 achieved the best accuracy-quality tradeoff.
+- Even a lightweight custom CNN achieved >82% validation accuracy.
+- Fine-tuning pretrained models provided +13% absolute accuracy improvement over baseline CNN.
+- Additional EfficientNet training increased validation accuracy from 0.9561 to 0.9631.
 
 ---
 
@@ -177,14 +201,14 @@ Final Kaggle score: **0.98618**
     ├── notebooks/
     │   └── Simpsons_98.ipynb
     │
-    src/
-    ├── config.py
-    ├── dataset.py
-    ├── models.py
-    ├── train.py
-    ├── evaluate.py
-    ├── inference.py
-    └── visualize.py
+    ├── src/
+    │   ├── config.py
+    │   ├── dataset.py
+    │   ├── models.py
+    │   ├── train.py
+    │   ├── evaluate.py
+    │   ├── inference.py
+    │   └── visualize.py
     │
     ├── assets/
     │   ├── dataset.png
