@@ -374,30 +374,30 @@ Logistic Regression показала:
 
 ## Структура проекта
 
-project/
-│
-├── data/
-│   ├── train.csv
-│   ├── test.csv
-│
-├── notebooks/
-│   └── hw_3_kaggle_stepik_final_version.ipynb
-│
-├── src/
-│   ├── preprocessing.py
-│   ├── train_linear.py
-│   ├── train_catboost.py
-│   ├── inference.py
-│   └── metrics.py
-│
-├── assets/
-│   ├── churn_by_contract.png
-│   ├── churn_by_internet.png
-│   ├── numeric_distributions.png
-│   └── cat_features_overview.png
-│
-├── requirements.txt
-└── README.md
+    project/
+    │
+    ├── data/
+    │   ├── train.csv
+    │   ├── test.csv
+    │
+    ├── notebooks/
+    │   └── hw_3_kaggle_stepik_final_version.ipynb
+    │
+    ├── src/
+    │   ├── preprocessing.py
+    │   ├── train_linear.py
+    │   ├── train_catboost.py
+    │   ├── inference.py
+    │   └── metrics.py
+    │
+    ├── assets/
+    │   ├── churn_by_contract.png
+    │   ├── churn_by_internet.png
+    │   ├── numeric_distributions.png
+    │   └── cat_features_overview.png
+    │
+    ├── requirements.txt
+    └── README.md
 
 
 ## Что можно улучшить дальше
