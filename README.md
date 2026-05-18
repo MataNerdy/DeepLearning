@@ -1,114 +1,235 @@
-# Game of Thrones Survival Prediction — sklearn Classification
+# ML & Deep Learning Portfolio
 
-## О проекте
+Репозиторийpet-проектами по Machine Learning, Deep Learning и Data Science.
 
-Проект посвящён задаче бинарной классификации на табличных данных из вселенной *Game of Thrones*.
+Проекты охватывают:
 
-Цель — предсказать, выживет ли персонаж (`isAlive`) на основе:
+- computer vision,
+- tabular machine learning,
+- feature engineering,
+- transfer learning,
+- hyperparameter tuning,
+- exploratory data analysis,
+- reproducible ML pipelines.
 
-- происхождения,
-- дома,
-- культуры,
-- семейных связей,
-- популярности,
-- участия в книгах,
-- социальных признаков.
-
-![Correlation Matrix](Game_of_thrones/images/correlation_matrix.png)
+Основной фокус — не только получение хороших метрик, но и построение понятных end-to-end ML решений с полноценным анализом данных, сравнением моделей и оформлением результатов.
 
 ---
 
-# STAR Summary
+# Проекты
 
-## Situation
+## 1. Simpsons Character Classification (Computer Vision)
 
-Исходный датасет содержал:
+Классификация персонажей мультсериала Simpsons с помощью CNN и transfer learning на PyTorch.
 
-- большое количество пропусков;
-- категориальные признаки высокой кардинальности;
-- разреженные genealogical-признаки;
-- неоднородные текстовые данные.
+### Что реализовано
 
-Особенно проблемными были:
+- custom CNN architecture,
+- transfer learning,
+- fine-tuning pretrained моделей,
+- image preprocessing pipeline,
+- DataLoader + augmentations,
+- inference pipeline,
+- визуализация предсказаний,
+- сравнение CNN-архитектур.
 
-- `culture`
-- `title`
-- `house`
-- `mother/father/heir/spouse`
+### Использованные модели
 
-Многие признаки имели более 50–80% пропусков.
+- SimpleCNN
+- ResNet18
+- EfficientNet-B0
+
+### Лучший результат
+
+| Metric | Value |
+|---|---|
+| Validation Accuracy | **0.9631** |
+| Kaggle Score | **0.98618** |
+
+### Основные ML-инсайты
+
+- transfer learning существенно ускоряет convergence;
+- EfficientNet-B0 дал лучший accuracy/efficiency tradeoff;
+- fine-tuning pretrained моделей улучшил качество более чем на 13% относительно baseline CNN.
+
+### Tech Stack
+
+- Python
+- PyTorch
+- torchvision
+- NumPy
+- pandas
+- matplotlib
 
 ---
 
-## Task
+## 2. Game of Thrones Survival Prediction (Tabular ML)
 
-Необходимо было:
+Бинарная классификация на табличных данных: предсказание выживания персонажей Game of Thrones с помощью sklearn.
 
-- провести EDA;
-- обработать NaN;
-- выполнить feature engineering;
-- подготовить данные для sklearn-моделей;
-- обучить и сравнить несколько алгоритмов классификации;
-- выбрать лучшую модель;
-- сформировать итоговый `submission.csv`.
+### Что реализовано
 
----
+- EDA,
+- feature engineering,
+- обработка high-cardinality категорий,
+- работа с пропусками,
+- One-Hot Encoding,
+- GridSearchCV,
+- сравнение sklearn-моделей,
+- modular ML pipeline.
 
-## Action
-
-В проекте был реализован полный ML pipeline:
-
-### EDA
-- анализ распределений;
-- исследование пропусков;
-- анализ корреляций;
-- визуализация survival distribution.
-
-### Feature Engineering
-- обработка категориальных признаков;
-- создание новых бинарных признаков;
-- объединение редких категорий;
-- генерация признаков:
-  - `isPopular`
-  - `boolDeadRelations`
-  - `years`
-
-### Encoding
-Для категориальных признаков использовался `OneHotEncoder`.
-
-### Обучение моделей
-Были протестированы:
+### Протестированные модели
 
 - Logistic Regression
 - Random Forest
 - AdaBoost
 - Gaussian Process
-- Gaussian Naive Bayes
+- GaussianNB
 - KNN
 - SVC
 - Decision Tree
 
-### Hyperparameter Tuning
-Для моделей использовался `GridSearchCV` с `cross-validation`.
-
----
-
-## Result
-
-Лучший результат показала модель:
-
-# KNeighborsClassifier
+### Лучший результат
 
 | Metric | Value |
 |---|---|
-| Best CV Accuracy | 0.8369 |
-| Holdout Accuracy | **0.8558** |
+| Best Holdout Accuracy | **0.8558** |
 
-Лучшие параметры:
+### Основные ML-инсайты
 
-```python
-{
-    'n_neighbors': 21,
-    'p': 1,
-    'weights': 'distance'
-}
+- feature engineering критически влияет на качество tabular ML;
+- distance-based методы могут outperform сложные модели после хорошей обработки признаков;
+- корректная обработка категориальных признаков и NaN существенно повышает accuracy.
+
+### Tech Stack
+
+- Python
+- pandas
+- NumPy
+- scikit-learn
+- matplotlib
+- seaborn
+
+---
+
+## 3. Customer Churn Prediction (Business ML)
+
+ML-проект по предсказанию оттока клиентов с использованием tabular ML и ROC-AUC optimization.
+
+### Что реализовано
+
+- полноценный EDA,
+- preprocessing pipeline,
+- обработка категориальных признаков,
+- baseline linear models,
+- CatBoost training,
+- cross-validation,
+- hyperparameter tuning,
+- ROC-AUC evaluation,
+- анализ переобучения.
+
+### Использованные модели
+
+- Logistic Regression
+- CatBoostClassifier
+
+### Лучший результат
+
+| Metric | Value |
+|---|---|
+| Validation ROC-AUC | **0.8548** |
+
+### Основные ML-инсайты
+
+- более сложная модель не всегда дает лучшее качество;
+- линейные модели могут outperform boosting на небольших tabular datasets;
+- корректный preprocessing и feature handling часто важнее complexity модели.
+
+### Business Insights
+
+EDA показал:
+
+- churn значительно выше у month-to-month клиентов;
+- long-term contracts улучшают retention;
+- internet service type сильно влияет на churn probability.
+
+### Tech Stack
+
+- Python
+- pandas
+- NumPy
+- scikit-learn
+- CatBoost
+- matplotlib
+- seaborn
+
+---
+
+# Что демонстрируют проекты
+
+## Machine Learning
+
+- supervised learning,
+- binary classification,
+- multiclass classification,
+- transfer learning,
+- boosting,
+- hyperparameter tuning,
+- cross-validation,
+- overfitting analysis.
+
+## Data Science
+
+- EDA,
+- feature engineering,
+- preprocessing,
+- работа с пропусками,
+- categorical encoding,
+- visualization,
+- reproducible pipelines.
+
+## Deep Learning
+
+- CNN,
+- EfficientNet,
+- ResNet,
+- PyTorch training pipelines,
+- fine-tuning,
+- inference pipelines.
+
+---
+
+# Общий стек технологий
+
+## ML / DL
+
+- Python
+- PyTorch
+- scikit-learn
+- CatBoost
+
+## Data Processing
+
+- pandas
+- NumPy
+
+## Visualization
+
+- matplotlib
+- seaborn
+
+---
+
+# Структура репозитория
+
+```text
+ML_Portfolio/
+│
+├── Simpsons_Classification/
+│
+├── Game_of_Thrones_Survival/
+│
+├── Customer_Churn_Prediction/
+│
+├── requirements.txt
+└── README.md
