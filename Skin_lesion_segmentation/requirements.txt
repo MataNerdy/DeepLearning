@@ -1,0 +1,10 @@
+torch
+torchvision
+torchmetrics
+numpy
+pandas
+scikit-image
+scikit-learn
+matplotlib
+tqdm
+gdown

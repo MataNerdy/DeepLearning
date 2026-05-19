@@ -1,0 +1,20 @@
+# data and models
+data/
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.rar
+*.zip
+
+# notebooks/cache
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# system
+.DS_Store
+
+# reports generated locally
+reports/*.csv
+reports/*.png
