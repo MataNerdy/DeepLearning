@@ -30,7 +30,7 @@ PyTorch-проект по построению и улучшению object dete
 Зеленый — ground truth
 
 <p align="center">
-  <img src="assets/pred.jpg" width="950">
+  <img src="assets/pred.png" width="950">
 </p>
 
 ---
@@ -302,7 +302,9 @@ DIoU:
 | mAP50 | 0.915 |
 | mAP50-95 | 0.6698 |
 
----
+# YOLOv8 Training Dynamics
+
+![yolo_training](assets/results.png)
 
 ## YOLOv8 Per-Class Metrics
 
@@ -313,7 +315,20 @@ DIoU:
 | class_2 | 0.833 | 0.697 |
 | class_3 | 0.863 | 0.457 |
 
----
+# Confusion Matrix Analysis
+
+![confusion_matrix](assets/confusion_matrix_normalized.png)
+
+## Confusion Matrix Insights
+
+- Classes 0 and 1 are detected very reliably (~98% normalized accuracy).
+- Class 2 also demonstrates strong separability (~92%).
+- Class 3 is the most difficult class due to limited samples and higher ambiguity.
+- Some foreground objects are still confused with background because of:
+  - small object size,
+  - partial occlusion,
+  - low visibility,
+  - dataset imbalance.
 
 # Why YOLOv8 Significantly Outperformed the Custom Detector
 
@@ -379,8 +394,8 @@ halo_object_detection/
     ├── train_distribution.png
     ├── test_distribution.png
     ├── pred.png
-    ├── example_1.png
-    └── example_2.png
+    ├── confusion_matrix_normalized.png
+    └── results.png
 
 ```
 
