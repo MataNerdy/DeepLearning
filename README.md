@@ -1,6 +1,6 @@
 # ML & Deep Learning Portfolio
 
-Репозиторийpet-проектами по Machine Learning, Deep Learning и Data Science.
+Репозиторий c pet-проектами по Machine Learning, Deep Learning и Data Science.
 
 Проекты охватывают:
 
@@ -233,3 +233,26 @@ ML_Portfolio/
 │
 ├── requirements.txt
 └── README.md
+```
+
+# Основные идеи репозитория
+
+## Репозиторий показывает:
+
+- построение end-to-end ML pipeline;
+- работу как с CV, так и с tabular ML;
+- preprocessing и feature engineering;
+- сравнение baseline и сложных моделей;
+- анализ качества моделей и ошибок;
+- оформление проектов в reproducible engineering-style формате.
+
+## Возможные дальнейшие улучшения:
+
+- MLflow / experiment tracking,
+- Dockerization,
+- CI/CD,
+- Optuna hyperparameter optimization,
+- SHAP explainability,
+- ensemble methods,
+- deployment inference services,
+- API inference pipelines.
