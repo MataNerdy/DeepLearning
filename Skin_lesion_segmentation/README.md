@@ -71,15 +71,11 @@ SegNet оказался слабым baseline для данной задачи. 
 
 ## Визуальное сравнение предсказаний
 
-### Пример 1
+### Примеры
 
 ![example1](assets/res1.png)
 
-### Пример 2
-
 ![example2](assets/res2.png)
-
-### Пример 3
 
 ![example2](assets/res3.png)
 
@@ -105,11 +101,15 @@ SegNet оказался слабым baseline для данной задачи. 
 
 ### SegNet
 
-![segnet](assets/segnet.png)
+<p align="center">
+  <img src="assets/segnet.png" width="850">
+</p>
 
 ### U-Net
 
-![unet](assets/unet.png)
+<p align="center">
+  <img src="assets/unet.png" width="850">
+</p>
 
 ## Сравнение моделей и loss-функций
 
@@ -124,6 +124,17 @@ SegNet оказался слабым baseline для данной задачи. 
 ├── .gitignore
 ├── notebooks/
 │   └── Unet_original.ipynb
+├── assets/
+│   ├── all_losses.png
+│   ├── unet_losses.png
+│   ├── segnet_losses.png
+│   ├── dataset.png
+│   ├── unet.png
+│   ├── segnet.png
+│   ├── res1.png
+│   ├── res2.png
+│   ├── res3.png
+│   └── res4.png
 ├── src/
 │   ├── config.py
 │   ├── download_data.py
@@ -135,11 +146,6 @@ SegNet оказался слабым baseline для данной задачи. 
 │   ├── train.py
 │   ├── evaluate.py
 │   └── visualize_predictions.py
-├── data/
-│   ├── raw/
-│   └── processed/
-├── checkpoints/
-└── reports/
 ```
 
 ## Быстрый старт
