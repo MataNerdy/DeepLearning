@@ -413,4 +413,4 @@ halo_object_detection/
 
 # Resume Bullet
 
-    Built and analyzed a modern object detection pipeline in PyTorch with FPN/PAN architectures, TAL label assignment and DIoU loss; conducted experiments on localization quality, training stability and multi-scale detection, and compared results against YOLOv8 baseline.
+Built and analyzed a modern object detection pipeline in PyTorch with FPN/PAN architectures, TAL label assignment and DIoU loss; conducted experiments on localization quality, training stability and multi-scale detection, and compared results against YOLOv8 baseline.
