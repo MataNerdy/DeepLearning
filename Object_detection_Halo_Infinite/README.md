@@ -16,8 +16,9 @@ PyTorch-проект по построению и улучшению object dete
 
 ## YOLOv8 Predictions
 
-![yolo_predictions](assets/yolo_labels.jpg)
-![yolo_predictions](assets/yolo_pred.jpg)
+<p align="center">
+  <img src="assets/yolo_pred.jpg" width="950">
+</p>
 
 ---
 
@@ -28,7 +29,9 @@ PyTorch-проект по построению и улучшению object dete
 Красный — prediction
 Зеленый — ground truth
 
-![pred_vs_gt](assets/pred.png)
+<p align="center">
+  <img src="assets/pred.jpg" width="950">
+</p>
 
 ---
 
@@ -379,15 +382,20 @@ halo_object_detection/
     ├── example_1.png
     └── example_2.png
 
-#Requirements
-torch
-torchvision
-ultralytics
-albumentations
-numpy
-pandas
-matplotlib
-opencv-python
-pillow
-Resume Bullet
-Built and analyzed a modern object detection pipeline in PyTorch with FPN/PAN architectures, TAL label assignment and DIoU loss; conducted experiments on localization quality, training stability and multi-scale detection, and compared results against YOLOv8 baseline.
+```
+
+# Requirements
+
+- torch
+- torchvision
+- ultralytics
+- albumentations
+- numpy
+- pandas
+- matplotlib
+- opencv-python
+- pillow
+
+# Resume Bullet
+
+    Built and analyzed a modern object detection pipeline in PyTorch with FPN/PAN architectures, TAL label assignment and DIoU loss; conducted experiments on localization quality, training stability and multi-scale detection, and compared results against YOLOv8 baseline.
