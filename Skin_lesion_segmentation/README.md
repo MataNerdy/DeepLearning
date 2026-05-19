@@ -103,13 +103,13 @@ SegNet оказался слабым baseline для данной задачи. 
 
 ## Архитектуры
 
-### U-Net
-
-![unet](assets/unet.png)
-
 ### SegNet
 
 ![segnet](assets/segnet.png)
+
+### U-Net
+
+![unet](assets/unet.png)
 
 ## Сравнение моделей и loss-функций
 
