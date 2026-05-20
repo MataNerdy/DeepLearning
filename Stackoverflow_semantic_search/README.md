@@ -159,6 +159,8 @@ python -m src.train_word2vec \
 
 Метрика учитывает не только факт попадания в top-K, но и позицию релевантного результата: чем выше дубликат в выдаче, тем больше вклад.
 
+![metrics comparison](assets/metrics_comparison.png)
+
 ## Main findings
 
 1. **Technical tokenizer заметно улучшает retrieval quality.**
