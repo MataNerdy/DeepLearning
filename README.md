@@ -164,38 +164,171 @@ EDA показал:
 - seaborn
 
 ---
+## 4. Halo Infinite Object Detection
+
+Современный object detection pipeline на PyTorch с исследованием detector architectures, assignment strategies и IoU-based losses.
+
+### Что реализовано
+
+- custom PyTorch detector,
+- EfficientNet backbone,
+- FPN / PAN neck,
+- decoupled detection head,
+- TAL label assignment,
+- DIoU loss,
+- YOLOv8 baseline comparison.
+
+### Лучшие результаты
+
+#### Custom Detector
+
+| Metric | Value |
+|---|---|
+| Validation mAP | 0.1545 |
+
+#### YOLOv8 Baseline
+
+| Metric | Value |
+|---|---|
+| Precision | 0.945 |
+| Recall | 0.854 |
+| mAP50 | 0.915 |
+| mAP50-95 | 0.6698 |
+
+### Основные ML-инсайты
+
+- TAL + DIoU дали наиболее заметный прирост качества;
+- assignment strategy и loss balancing оказались важнее backbone architecture;
+- production-grade training recipes существенно влияют на качество detector'ов.
+
+### Ключевые технологии
+
+- PyTorch
+- YOLOv8
+- Albumentations
+- FPN / PAN
+- TAL
+- DIoU Loss
+
+---
+
+## 5. Skin Lesion Segmentation with U-Net and SegNet
+
+Proof-of-concept CV-система для автоматической сегментации кожных поражений на дерматоскопических изображениях.
+
+### Что реализовано
+
+- SegNet и U-Net,
+- BCE / Dice / Tversky / Focal Loss,
+- Dice и IoU evaluation,
+- preprocessing pipeline,
+- visualization pipeline,
+- experiment comparison.
+
+### Лучший результат
+
+| Model | Loss | Validation Dice |
+|---|---|---|
+| U-Net | Tversky Loss | **0.900** |
+
+### Основные ML-инсайты
+
+- U-Net существенно превосходит SegNet благодаря skip-connections;
+- Tversky Loss оказался наиболее устойчивым для lesion segmentation;
+- BCE Loss хуже оптимизирует форму медицинских масок.
+
+### Ключевые технологии
+
+- PyTorch
+- U-Net
+- SegNet
+- Medical Imaging
+- Dice / IoU
+- Semantic Segmentation
+
+---
+
+## 6. Text-Guided Face Editing with StyleGAN2, CLIP and ArcFace
+
+Generative AI / Computer Vision проект по text-guided редактированию синтетических лиц.
+
+### Что реализовано
+
+- StyleGAN2 generation,
+- CLIP-guided optimization,
+- ArcFace identity preservation,
+- latent optimization,
+- ID Loss,
+- grid search коэффициентов.
+
+### Основная задача
+
+Редактирование изображения по текстовому промпту:
+
+```text
+a person with bright green hair
+```
+
+при сохранении identity исходного лица.
+
+### Основные ML-инсайты
+
+- высокий ID Loss лучше сохраняет лицо, но ослабляет редактирование;
+- низкая регуляризация усиливает эффект, но увеличивает артефакты;
+- баланс между CLIP guidance и identity preservation критичен для controllable editing.
+
+### Ключевые технологии
+
+- StyleGAN2
+- OpenAI CLIP
+- ArcFace
+- Latent Optimization
+- Generative AI
+- PyTorch
+
+---
 
 # Что демонстрируют проекты
+
+## Computer Vision
+
+- image classification,
+- object detection,
+- semantic segmentation,
+- generative image editing,
+- multi-scale feature extraction,
+- medical image analysis.
 
 ## Machine Learning
 
 - supervised learning,
 - binary classification,
 - multiclass classification,
-- transfer learning,
 - boosting,
 - hyperparameter tuning,
 - cross-validation,
 - overfitting analysis.
-
-## Data Science
-
-- EDA,
-- feature engineering,
-- preprocessing,
-- работа с пропусками,
-- categorical encoding,
-- visualization,
-- reproducible pipelines.
 
 ## Deep Learning
 
 - CNN,
 - EfficientNet,
 - ResNet,
-- PyTorch training pipelines,
-- fine-tuning,
-- inference pipelines.
+- U-Net,
+- StyleGAN2,
+- ArcFace,
+- transfer learning,
+- fine-tuning.
+
+## Data Science
+
+- EDA,
+- feature engineering,
+- preprocessing,
+- categorical encoding,
+- reproducible ML pipelines,
+- visualization,
+- business metrics analysis.
 
 ---
 
@@ -207,6 +340,7 @@ EDA показал:
 - PyTorch
 - scikit-learn
 - CatBoost
+- Ultralytics YOLO
 
 ## Data Processing
 
@@ -218,6 +352,13 @@ EDA показал:
 - matplotlib
 - seaborn
 
+## CV / DL Tools
+
+- Albumentations
+- torchvision
+- TorchMetrics
+- OpenAI CLIP
+
 ---
 
 # Структура репозитория
@@ -226,27 +367,33 @@ EDA показал:
 ML_Portfolio/
 │
 ├── Simpsons_Classification/
-│
 ├── Game_of_Thrones_Survival/
-│
 ├── Customer_Churn_Prediction/
+├── Halo_Object_Detection/
+├── Skin_Lesion_Segmentation/
+├── Text_Guided_Face_Editing/
 │
 ├── requirements.txt
 └── README.md
 ```
 
+---
+
 # Основные идеи репозитория
 
-## Репозиторий показывает:
+Репозиторий показывает:
 
 - построение end-to-end ML pipeline;
-- работу как с CV, так и с tabular ML;
+- работу с CV, tabular ML и generative AI;
 - preprocessing и feature engineering;
-- сравнение baseline и сложных моделей;
+- сравнение baseline и production-grade решений;
 - анализ качества моделей и ошибок;
-- оформление проектов в reproducible engineering-style формате.
+- reproducible engineering-style подход;
+- исследовательский подход к ML experimentation.
 
-## Возможные дальнейшие улучшения:
+---
+
+# Возможные дальнейшие улучшения
 
 - MLflow / experiment tracking,
 - Dockerization,
@@ -255,4 +402,11 @@ ML_Portfolio/
 - SHAP explainability,
 - ensemble methods,
 - deployment inference services,
-- API inference pipelines.
+- FastAPI / Streamlit demos,
+- distributed training.
+
+---
+
+# GitHub
+
+GitHub Profile: https://github.com/MataNerdy

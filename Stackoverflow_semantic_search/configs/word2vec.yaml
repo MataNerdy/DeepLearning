@@ -1,0 +1,7 @@
+vector_size: 200
+window: 12
+min_count: 5
+workers: 4
+tokenizer: technical
+normalize_tokens: true
+max_validation_examples: 1000
