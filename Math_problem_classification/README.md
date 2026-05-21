@@ -6,10 +6,10 @@
 
 **Пример работы модели**
 
-Модель получает текст математической задачи и возвращает три наиболее вероятные темы.
+Модель получает текст математической задачи и возвращает наиболее вероятную тему.
 
-<p align="center">
-  <img src="assets/title.png" width="500">
+<p align="right">
+  <img src="assets/download.png" width="500">
 </p>
 
 
@@ -164,6 +164,51 @@ number_theory     0.6614    0.8745    0.7532       478
 Главная проблема модели — смещение в сторону самого частого класса `number_theory`.
 Лучше всего модель распознаёт `geometry`, `number_theory` и `polynoms`; хуже всего — `graphs` и `invariant`.
 
+### Example 1
+
+**Input**
+
+> How many ways are there to choose 3 students from a group of 10?
+
+| Topic | Probability |
+|---|---:|
+| `combinatorics` | 0.9009 |
+| `graphs` | 0.0297 |
+| `dirichlet` | 0.0295 |
+
+---
+
+### Example 2
+
+**Input**
+
+> Prove that the sum of the angles of a triangle is 180 degrees.
+
+| Topic | Probability |
+|---|---:|
+| `dirichlet` | 0.3866 |
+| `geometry` | 0.2636 |
+| `number_theory` | 0.1826 |
+
+---
+
+### Example 3
+
+**Input**
+
+> Find all integers n such that n² + n + 1 is divisible by 7.
+
+| Topic | Probability |
+|---|---:|
+| `number_theory` | 0.9038 |
+| `polynoms` | 0.0503 |
+| `combinatorics` | 0.0350 |
+
+
+### Confusion matrix
+
+![confusion matrix](assets/notebook_cell_72_output_1.png)
+
 ---
 
 ## Project structure
@@ -261,13 +306,6 @@ python -m src.predict \
 ```
 
 ---
-
-## Visual analysis
-
-### Confusion matrix
-
-![confusion matrix](assets/notebook_cell_72_output_1.png)
-
 
 ### Attention maps
 
