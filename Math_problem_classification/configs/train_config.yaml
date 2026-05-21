@@ -1,0 +1,21 @@
+data:
+  source_url: "https://docs.google.com/spreadsheets/d/13YIbphbWc62sfa-bCh8MLQWKizaXbQK9/export?format=xlsx"
+  text_column: "problem_text"
+  label_column: "topic"
+  test_size: 0.2
+  random_state: 42
+
+model:
+  model_name: "cointegrated/rubert-tiny2"
+  dropout: 0.25
+  max_length: 256
+  freeze_backbone: false
+
+training:
+  epochs: 20
+  batch_size: 32
+  learning_rate_backbone: 0.00001
+  learning_rate_head: 0.0001
+  weight_decay: 0.01
+  patience: 3
+  use_amp: true
