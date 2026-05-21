@@ -1,9 +1,12 @@
-# Math Problem Topic Classification with TF-IDF, RuBERT and MathBERT
+# Math Problem Topic Classification with RuBERT and MathBERT
 
 Проект посвящён классификации текстов математических задач по тематическим разделам.
 Цель — сравнить классические NLP baseline-модели и transformer-based подходы на небольшом специализированном датасете математических формулировок.
 
-![model comparison](assets/title.png)
+![Пример работы классификатора]
+<p align="center">
+  <img src="assets/title.png" width="950">
+</p>
 
 ## Кратко
 
@@ -16,6 +19,10 @@
 - `invariant`
 - `number_theory`
 - `polynoms`
+
+### Class distribution
+
+![class distribution](assets/notebook_cell_61_output_0.png)
 
 Были протестированы:
 
@@ -38,6 +45,10 @@
 |---|---:|
 | TF-IDF + Logistic Regression | ~0.553 |
 | TF-IDF + LinearSVC | ~0.546 |
+
+
+![Model comparison](assets/notebook_cell_70_output_1.png)
+
 
 Основной вывод: на небольшом и несбалансированном датасете математических текстов классические TF-IDF модели остаются сильным baseline, а transformer fine-tuning улучшает accuracy, но требует аккуратного анализа качества по классам.
 
@@ -248,17 +259,10 @@ python -m src.predict \
 
 ## Visual analysis
 
-### Class distribution
-
-![class distribution](assets/notebook_cell_61_output_0.png)
-
 ### Confusion matrix
 
 ![confusion matrix](assets/notebook_cell_72_output_1.png)
 
-### Пример работы модели
-
-![error pairs](assets/example.png)
 
 ### Attention maps
 
