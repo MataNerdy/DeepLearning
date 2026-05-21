@@ -149,10 +149,7 @@ Best model:
 
 ### Baseline RNN
 
-<p align="center">
-  <img src="assets/baseline_loss_curves.png" width="500">
-  <img src="assets/baseline_acc_curves.png" width="500">
-</p>
+![Baseline loss and accuracy curves](assets/baceline_train_curves.png)
 
 ### RNN vs GRU vs LSTM
 
