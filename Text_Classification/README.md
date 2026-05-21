@@ -116,6 +116,8 @@ AG News
 | longer training | convergence analysis |
 | gradient clipping | stabilization |
 
+## Experiment Results
+
 | Model | Pooling | Best Accuracy |
 |---|---:|---:|
 | GRU-1x256 | max | 0.9184 |
@@ -147,8 +149,10 @@ Best model:
 
 ### Baseline RNN
 
-![Baseline loss curves](assets/baseline_loss_curves.png)
-![Baseline accuracy curves](assets/baseline_acc_curves.png)
+<p align="center">
+  <img src="assets/baseline_loss_curves.png" width="500">
+  <img src="assets/baseline_acc_curves.png" width="500">
+</p>
 
 ### RNN vs GRU vs LSTM
 
@@ -168,8 +172,10 @@ Best model:
 
 ### Final GRU Training
 
-![Final GRU loss curve](assets/final_loss_curve.png)
-![Final GRU accuracy curve](assets/final_acc_curve.png)
+<p align="center">
+  <img src="assets/final_loss_curve.png" width="500">
+  <img src="assets/final_acc_curve.png" width="500">
+</p>
 
 ## Основные выводы
 
