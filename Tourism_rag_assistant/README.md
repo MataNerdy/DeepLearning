@@ -12,7 +12,7 @@
 
 ---
 
-![pipeline](assets/pipeline.png)
+![Pipeline](assets/pipeline.png)
 
 ---
 
