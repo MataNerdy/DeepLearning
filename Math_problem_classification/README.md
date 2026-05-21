@@ -9,7 +9,7 @@
 Модель получает текст математической задачи и возвращает наиболее вероятную тему.
 
 <p align="left">
-  <img src="assets/download.png" width="500">
+  <img src="assets/download.png" width="750">
 </p>
 
 ## Кратко
