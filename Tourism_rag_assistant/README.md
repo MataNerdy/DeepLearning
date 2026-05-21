@@ -12,7 +12,7 @@
 
 ---
 
-![pipeline](assets/pipeline_rag.png)
+![pipeline](assets/pipeline.png)
 
 ---
 
