@@ -35,7 +35,7 @@
 Сильный классический baseline:
 
 | Model | Accuracy |
-|---|---:|---:|
+|---|---:|
 | TF-IDF + Logistic Regression | ~0.553 |
 | TF-IDF + LinearSVC | ~0.546 |
 
@@ -264,7 +264,7 @@ python -m src.predict \
 
 Пример attention-визуализации первого слоя transformer-модели:
 
-![attention example](assets/notebook_cell_54_output_0.png)
+![attention example](assets/notebook_cell_46_output_3.png)
 
 Attention-карты использовались не как строгая причинная интерпретация, а как диагностический инструмент: они помогают увидеть, какие токены и локальные связи модель выделяет до и после fine-tuning.
 
