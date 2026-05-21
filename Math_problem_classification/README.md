@@ -3,7 +3,7 @@
 Проект посвящён классификации текстов математических задач по тематическим разделам.
 Цель — сравнить классические NLP baseline-модели и transformer-based подходы на небольшом специализированном датасете математических формулировок.
 
-![model comparison](assets/notebook_cell_70_output_1.png)
+![model comparison](assets/title.png)
 
 ## Кратко
 
