@@ -1,220 +1,256 @@
 # Tourism RAG Assistant
 
-RAG-система туристического гида по достопримечательностям: очистка мультимодального датасета, построение базы знаний, retrieval через векторную БД, reranking и генерация ответов на русском языке.
+Мультимодальная Retrieval-Augmented Generation (RAG) система для поиска и генерации ответов о туристических и исторических объектах России.
 
-![pipeline](assets/pipeline.png)
+Проект объединяет:
+- структурированные данные WikiData;
+- изображения достопримечательностей;
+- BLIP-caption описания изображений;
+- retrieval pipeline на эмбеддингах;
+- reranking через ColBERT;
+- генерацию ответов с помощью Mistral.
 
-## STAR Summary
+---
 
-### Situation
+![pipeline](assets/pipeline_rag.png)
 
-В исходном датасете были описания туристических и исторических объектов, WikiData ID, города, координаты, изображения в base64 и автоматически сгенерированные описания изображений. Данные были шумными: встречались дубли, нерелевантные изображения, рекламные/социальные артефакты, подписи, плохо связанные с реальными достопримечательностями.
+---
 
-### Task
+# О проекте
 
-Собрать прототип туристического RAG-ассистента, который:
+Проект представляет собой end-to-end RAG pipeline для туристического поиска.
 
-- очищает и агрегирует данные по достопримечательностям;
-- строит поисковую базу знаний;
-- отвечает на вопросы пользователя только на основе найденного контекста;
-- визуализирует структуру эмбеддингов;
-- оценивает качество retrieval/generation через RAGAS-подобные метрики.
+Система:
+1. очищает и нормализует шумные мультимодальные данные;
+2. агрегирует множество описаний одного объекта;
+3. строит векторную базу знаний;
+4. выполняет retrieval + reranking;
+5. генерирует финальный ответ с опорой на найденный контекст.
 
-### Action
+---
 
-В проекте реализован полный pipeline:
+# Situation
 
-1. **Data cleaning**
-   - нормализация текстов;
-   - удаление дублей по BLIP-caption;
-   - канонизация названий по `WikiData`;
-   - regex-фильтрация мусорных описаний;
-   - проверка смысловой близости `description` и `en_txt` через sentence-transformers;
-   - агрегация нескольких записей в один документ на достопримечательность.
+Исходный датасет содержал большое количество:
+- дублей;
+- шумных caption;
+- несвязанных изображений;
+- неполных описаний;
+- различных вариантов одного и того же объекта.
 
-2. **Knowledge base**
-   - каждая локация превращается в `LangChain Document`;
-   - текст документа включает название, город, описание из WikiData и описание изображения;
-   - embeddings строятся через `intfloat/multilingual-e5-base`;
-   - документы сохраняются в `Chroma`.
+Каждая достопримечательность могла встречаться десятки раз с разными текстами и изображениями.
 
-3. **RAG pipeline**
-   - top-k retrieval из Chroma;
-   - удаление дублей;
-   - reranking через `colbert-ir/colbertv2.0`;
-   - reader-модель `Mistral-7B-Instruct`;
-   - системный промпт запрещает галлюцинации и требует отвечать только по контексту.
+### Примеры объектов
 
-4. **Evaluation**
-   - генерация 100 QA-примеров;
-   - `answer_relevancy` через семантическую близость ответа и follow-up questions;
-   - `context_recall`;
-   - `context_precision`.
+![examples](assets/pics.png)
 
-5. **Visualization**
-   - PCA-проекция эмбеддингов;
-   - UMAP-проекция эмбеддингов;
-   - графики cleaning funnel и итоговых метрик;
-   - Streamlit-интерфейс для демонстрации RAG.
+---
 
-### Result
+# Task
 
-| Metric / artifact | Value |
-|---|---:|
-| Валидных строк после удаления пропусков | 12 078 |
-| Строк после удаления дублей по `en_txt` | 8 137 |
-| Доля regex-подозрительных записей | 19.1% |
-| Строк после regex-фильтрации | 6 586 |
-| Уникальных достопримечательностей | 295 |
-| Итоговых документов для RAG | 250 |
-| Максимальная длина текста | 53 токена |
-| Лимит embedding-модели | 512 токенов |
-| `answer_relevancy` | 0.850 |
-| `context_recall` | 1.000 |
-| `context_precision` | 0.660 |
+Построить retrieval-систему, способную:
+- находить релевантные туристические объекты;
+- агрегировать информацию из разных источников;
+- уменьшать шум и дубли;
+- генерировать качественные ответы на пользовательские запросы.
 
-![funnel](assets/data_cleaning_funnel.png)
+---
+
+# Action
+
+## 1. Очистка данных
+
+Выполнены:
+- regex-фильтрация мусорных записей;
+- semantic deduplication;
+- TF-IDF анализ шумных паттернов;
+- нормализация текстов;
+- фильтрация коротких и нерелевантных caption.
+
+### Результаты очистки
+
+| Этап | Количество |
+|---|---|
+| Raw rows | 12078 |
+| После очистки | 8137 |
+| Уникальных объектов | 295 |
+| Среднее число дублей на объект | 27.58 |
+| Максимум дублей | 70 |
+
+### Распределение дублей
+
+![distribution](assets/data_distribution.png)
+
+---
+
+## 2. Агрегация документов
+
+Для каждого объекта:
+- выбирались наиболее репрезентативные описания;
+- удалялись семантические дубли;
+- объединялись:
+  - WikiData descriptions;
+  - BLIP image captions;
+  - metadata;
+  - пользовательские hints.
+
+Итог:
+- 250 полноценных документов для retrieval pipeline.
+
+---
+
+## 3. Построение retrieval pipeline
+
+Использовались:
+- `intfloat/e5-large-v2` — эмбеддинги;
+- `ChromaDB` — векторная база;
+- `ColBERTv2` — reranking;
+- `Mistral-7B-Instruct` — генерация ответа.
+
+Pipeline:
+1. dense retrieval;
+2. top-k candidate search;
+3. ColBERT reranking;
+4. answer generation.
+
+---
+
+## 4. Анализ embedding space
+
+Построены PCA и UMAP проекции эмбеддингов.
+
+Наблюдается кластеризация объектов по городам, что указывает на наличие семантической структуры в embedding space.
+
+### PCA projection
+
+![pca](assets/pca.png)
+
+### UMAP projection
+
+![umap](assets/umap.png)
+
+---
+
+# Result
+
+## RAG metrics
 
 ![metrics](assets/rag_metrics.png)
 
-## Пример использования
+| Метрика | Значение |
+|---|---|
+| Answer relevancy | 0.85 |
+| Context recall | 1.00 |
+| Context precision | 0.66 |
 
-Вопрос:
+---
 
-```text
-Что посмотреть в Ярославле, если люблю старинные храмы и набережную?
-```
+# Пример ответа системы
 
-Ожидаемое поведение системы:
+### Вопрос
 
-- найти документы по Ярославлю;
-- поднять выше храмы, монастыри, исторические здания и объекты рядом с набережной;
-- после reranking отдать LLM только наиболее релевантные источники;
-- ответить на русском языке без выдумывания фактов вне контекста.
+> Что посмотреть в Ярославле, если люблю старинные храмы и набережную?
 
-## Структура репозитория
+### Ответ
 
-```text
-tourism-rag-assistant/
-├── assets/
-│   ├── data_cleaning_funnel.png
-│   ├── pipeline.png
-│   └── rag_metrics.png
-├── data/
-│   ├── raw/
-│   └── processed/
-├── notebooks/
-│   └── RAG_original.ipynb
-├── reports/
-│   └── sample_query.md
-├── src/
-│   ├── app.py
-│   ├── config.py
-│   ├── data_preprocessing.py
-│   ├── evaluate.py
-│   ├── rag_pipeline.py
-│   ├── vector_store.py
-│   └── visualize_embeddings.py
-├── .gitignore
-├── Makefile
-├── README.md
-└── requirements.txt
-```
+Система рекомендует:
+- храм Ярославской иконы Божией Матери;
+- приход Воздвижения Святого Креста;
+- церковь Михаила Архангела;
+- Толгский монастырь;
+- набережную Волги и исторический центр города.
 
-## Быстрый старт
+Ответ формируется на основе retrieval + reranking + генерации по найденным источникам.
+
+---
+
+# Используемые технологии
+
+## NLP / RAG
+- Sentence Transformers
+- E5-large-v2
+- ColBERTv2
+- Mistral-7B-Instruct
+
+## Vector Search
+- ChromaDB
+
+## Data Processing
+- Pandas
+- NumPy
+- Scikit-learn
+- Regex
+- TF-IDF
+
+## Visualization
+- Matplotlib
+- Seaborn
+- PCA
+- UMAP
+
+---
+
+# Структура проекта
 
 ```bash
-git clone <your-repo-url>
-cd tourism-rag-assistant
+tourism-rag-assistant/
+│
+├── assets/
+│   ├── pipeline.png
+│   ├── pca.png
+│   ├── umap.png
+│   ├── pics.png
+│   ├── rag_metrics.png
+│   └── data_distribution.png
+│
+├── notebooks/
+│   └── RAG.ipynb
+│
+├── src/
+│   ├── cleaning.py
+│   ├── aggregation.py
+│   ├── embeddings.py
+│   ├── retrieval.py
+│   ├── rerank.py
+│   ├── generation.py
+│   └── evaluation.py
+│
+├── app/
+│   └── streamlit_app.py
+│
+├── requirements.txt
+└── README.md
+```
 
-python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
+---
 
+# Возможные улучшения
+
+- hybrid retrieval (BM25 + dense retrieval);
+- multilingual retrieval;
+- image-text cross-modal embeddings;
+- citation grounding;
+- RAGAS evaluation;
+- fine-tuning retrieval модели;
+- production deployment.
+
+---
+
+# Запуск
+
+## Установка
+
+```bash
 pip install -r requirements.txt
 ```
 
-### 1. Подготовить данные
+## Streamlit demo
 
 ```bash
-make prepare
+streamlit run app/streamlit_app.py
 ```
 
-или
-
-```bash
-python src/data_preprocessing.py
-```
-
-Скрипт скачает CSV из Google Drive, очистит данные и сохранит итоговый датасет в `data/processed/tourism_rag.csv`.
-
-### 2. Построить Chroma index
-
-```bash
-make index
-```
-
-или
-
-```bash
-python src/vector_store.py
-```
-
-### 3. Построить визуализации эмбеддингов
-
-```bash
-make viz
-```
-
-Результаты сохраняются в:
-
-```text
-reports/pca_embeddings.html
-reports/umap_embeddings.html
-```
-
-### 4. Запустить демо
-
-```bash
-make app
-```
-
-или
-
-```bash
-streamlit run src/app.py
-```
-
-## Ключевые решения
-
-### Почему multilingual E5
-
-В датасете смешаны русские, английские и потенциально другие описания. Поэтому использована multilingual embedding-модель `intfloat/multilingual-e5-base`, чтобы retrieval не ломался на разноязычных фрагментах.
-
-### Почему Chroma
-
-Chroma удобна для локального прототипа: быстро поднимается, не требует отдельного сервера и легко интегрируется с LangChain.
-
-### Почему ColBERT reranking
-
-Обычный dense retrieval хорошо находит кандидатов, но порядок документов в промпте влияет на ответ. Поэтому после top-k retrieval используется reranking через ColBERT, чтобы в финальный контекст попадали более точные документы.
-
-### Почему нужна отдельная очистка
-
-Без очистки база знаний начинает включать нерелевантные подписи: личные фото, баннеры, изображения людей, машины, рекламные и социальные артефакты. Это ухудшает retrieval и повышает риск галлюцинаций.
-
-## Что можно улучшить
-
-- заменить эвристический `context_precision` на полноценную LLM-as-a-judge оценку;
-- добавить ручной golden set вопросов;
-- сделать hybrid search: BM25 + dense retrieval;
-- добавить фильтр по городу и типу достопримечательности;
-- сохранить изображения отдельно и показывать их в Streamlit;
-- добавить Dockerfile и GitHub Actions;
-- вынести heavy inference в Colab/Kaggle pipeline.
-
-## Стек
-
-`Python`, `Pandas`, `NumPy`, `scikit-learn`, `SentenceTransformers`, `LangChain`, `Chroma`, `RAGatouille / ColBERT`, `Transformers`, `Mistral-7B-Instruct`, `Plotly`, `UMAP`, `Streamlit`.
+---
 
 ## Авторская заметка
 
